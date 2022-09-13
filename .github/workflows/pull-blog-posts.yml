@@ -1,0 +1,16 @@
+name: Pull Blog Posts
+on: 
+  schedule:
+    - cron: 0 9 * * 6
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: JasonEtco/rss-to-readme@v1
+        with:
+          feed-url: https://www.scottishtecharmy.org/blog
+          readme-section: feed
+          max: 5 # max number of items (default 5)
+          template: "#### [{{ title }}]({{ link }}) \n*{{ contentSnippet }}*\n\n"
